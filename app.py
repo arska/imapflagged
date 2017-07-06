@@ -33,7 +33,8 @@ def get_flagged_items():
 def metrics():
     return generate_latest(REGISTRY)
 
-flagged_items.set_function(get_flagged_items)
+# use the cached item count
+flagged_items.set_function(index)
 
 if __name__ == '__main__':
     #print(os.environ)
