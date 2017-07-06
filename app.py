@@ -1,17 +1,26 @@
 import imaplib
 import os
-from flask import Flask
+import time
+from flask import Flask, request
 app = Flask(__name__)
 from werkzeug.contrib.cache import SimpleCache
 cache = SimpleCache()
-from prometheus_client import Summary, Gauge, REGISTRY, generate_latest
-request_time = Summary('request_processing_seconds', 'Time spent processing http request')
-metrics_time = Summary('metrics_processing_seconds', 'Time spent processing metrics request')
-imap_time = Summary('imap_processing_seconds', 'Time spent processing imap request')
+from prometheus_client import Histogram, Counter, Summary, Gauge, REGISTRY, generate_latest
 flagged_items = Gauge('imap_flagged', 'Number of flagged items in IMAP mailbox')
+imap_time = Summary('imap_processing_seconds', 'Time spent processing imap request')
+FLASK_REQUEST_LATENCY = Histogram('flask_request_latency_seconds', 'Flask Request Latency', ['method', 'endpoint'])
+FLASK_REQUEST_COUNT = Counter('flask_request_count', 'Flask Request Count', ['method', 'endpoint', 'http_status'])
+
+def before_request():
+    request.start_time = time.time()
+
+def after_request(response):
+    request_latency = max(time.time() - request.start_time, 0) # time can go backwards...
+    FLASK_REQUEST_LATENCY.labels(request.method, request.path).observe(request_latency)
+    FLASK_REQUEST_COUNT.labels(request.method, request.path, response.status_code).inc()
+    return response
 
 @app.route('/')
-@request_time.time()
 def index():
     items = cache.get('flagged-items')
     if items is None:
@@ -29,13 +38,15 @@ def get_flagged_items():
     return str(flagged)
 
 @app.route('/metrics')
-@metrics_time.time()
 def metrics():
     return generate_latest(REGISTRY)
 
-# use the cached item count
+# use the cached item count for the prometheus metric
 flagged_items.set_function(index)
 
 if __name__ == '__main__':
     #print(os.environ)
+    app.before_request(before_request)
+    app.after_request(after_request)
     app.run(host='0.0.0.0',port=8080)
+
