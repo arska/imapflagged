@@ -4,4 +4,4 @@ itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 prometheus-client==0.0.21
-Werkzeug==0.12.2
+Werkzeug==0.13
