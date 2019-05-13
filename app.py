@@ -36,13 +36,11 @@ FLASK_REQUEST_SIZE = Gauge(
 UPDATE_TIME = Summary(
     'update_seconds',
     'Time spent loading data upstream',
-    None
 )
 
 FLAGGED_ITEMS = Gauge(
     'imap_flagged',
     'number of flagged items in IMAP mailbox',
-    None
 )
 
 LOGFORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
