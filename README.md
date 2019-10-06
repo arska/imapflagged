@@ -1,5 +1,5 @@
 # IMAP Flagged Items
-[![Build Status](https://travis-ci.org/arska/imapflagged.png)](https://travis-ci.org/arska/imapflagged)
+i[![Build Status](https://travis-ci.com/arska/imapflagged.svg?branch=master)](https://travis-ci.com/arska/imapflagged)
 
 This is a very short web application showing the number of flagged items in an IMAP mailbox. It caches the number for 5 minutes by default to offload the imap server.
 
