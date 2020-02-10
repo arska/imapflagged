@@ -10,5 +10,5 @@ itsdangerous==1.1.0       # via flask
 jinja2==2.10.3            # via flask
 markupsafe==1.1.1         # via jinja2
 prometheus-client==0.7.1
-python-dotenv==0.10.3
+python-dotenv==0.11.0
 werkzeug==0.16.0          # via flask
