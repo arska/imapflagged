@@ -18,7 +18,7 @@ from prometheus_client import (
     Summary,
     generate_latest,
 )
-from werkzeug.contrib.cache import SimpleCache
+from cachelib import SimpleCache
 
 APP = Flask(__name__)  # Standard Flask app
 CACHE = SimpleCache()

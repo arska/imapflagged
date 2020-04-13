@@ -4,6 +4,7 @@
 #
 #    pip-compile requirements.in
 #
+cachelib==0.1
 click==7.1.1              # via flask
 flask==1.1.2
 itsdangerous==1.1.0       # via flask
