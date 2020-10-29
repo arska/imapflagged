@@ -4,12 +4,12 @@
 #
 #    pip-compile requirements.in
 #
-cachelib==0.1
+cachelib==0.1             # via -r requirements.in
 click==7.1.1              # via flask
-flask==1.1.2
+flask==1.1.2              # via -r requirements.in
 itsdangerous==1.1.0       # via flask
 jinja2==2.11.2            # via flask
 markupsafe==1.1.1         # via jinja2
-prometheus-client==0.7.1
-python-dotenv==0.12.0
+prometheus-client==0.7.1  # via -r requirements.in
+python-dotenv==0.15.0     # via -r requirements.in
 werkzeug==1.0.1           # via flask
