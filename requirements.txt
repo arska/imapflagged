@@ -15,5 +15,5 @@ markupsafe==2.0.1         # via jinja2
 prometheus-client==0.13.1
 python-dotenv==0.19.2
 typing-extensions==3.10.0.2  # via importlib-metadata
-werkzeug==2.0.2           # via flask
+werkzeug==2.0.3           # via flask
 zipp==3.7.0               # via importlib-metadata
