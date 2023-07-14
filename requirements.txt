@@ -16,4 +16,4 @@ prometheus-client==0.17.1
 python-dotenv==1.0.0
 typing-extensions==4.7.1  # via importlib-metadata
 werkzeug==2.3.6           # via flask
-zipp==3.16.1               # via importlib-metadata
+zipp==3.16.2               # via importlib-metadata
